@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.86fd42a2.css",
-    "main.js": "/static/js/main.fad6f677.js",
-    "static/media/logo.svg": "/static/media/logo.b2e5a01e505f739f1484b881277d5186.svg",
-    "index.html": "/index.html",
-    "main.86fd42a2.css.map": "/static/css/main.86fd42a2.css.map",
-    "main.fad6f677.js.map": "/static/js/main.fad6f677.js.map"
+    "main.css": "/cloudrop/static/css/main.5aa29352.css",
+    "main.js": "/cloudrop/static/js/main.11097fd9.js",
+    "static/media/logo.svg": "/cloudrop/static/media/logo.b2e5a01e505f739f1484b881277d5186.svg",
+    "index.html": "/cloudrop/index.html",
+    "main.5aa29352.css.map": "/cloudrop/static/css/main.5aa29352.css.map",
+    "main.11097fd9.js.map": "/cloudrop/static/js/main.11097fd9.js.map"
   },
   "entrypoints": [
-    "static/css/main.86fd42a2.css",
-    "static/js/main.fad6f677.js"
+    "static/css/main.5aa29352.css",
+    "static/js/main.11097fd9.js"
   ]
 }
