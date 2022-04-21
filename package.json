@@ -12,7 +12,7 @@
     "react-redux": "^7.2.8",
     "react-scripts": "5.0.1"
   },
-  "homepage": "/cloudrop",
+  "homepage": "https://rafaelvillagomezdev.github.io/clouDrop/",
   "scripts": {
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
