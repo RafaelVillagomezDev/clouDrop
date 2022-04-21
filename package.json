@@ -10,7 +10,8 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-redux": "^7.2.8",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
   "homepage": "https://rafaelvillagomezdev.github.io/clouDrop",
   "scripts": {
