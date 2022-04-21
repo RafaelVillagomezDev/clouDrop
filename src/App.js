@@ -38,7 +38,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Redux Toolkit
+            Redux Toolkit FUNCIONA
           </a>
           ,<span> and </span>
           <a
