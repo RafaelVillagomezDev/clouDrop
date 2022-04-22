@@ -14,7 +14,7 @@ import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import images from "../../assets/images"
 
-const pages = ['Home', 'My Photos', 'Fav']
+const pages = ['Home', 'My Pages', 'Fav']
 
 
 

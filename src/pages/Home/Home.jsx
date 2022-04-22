@@ -1,9 +1,12 @@
+import SliderTags from "../../components/sliderTags/SliderTags";
+
+
 function Home(){
 
     return (
-      <div>
-          <p>Soy home</p>
-      </div>
+      <>
+        <SliderTags/>
+      </>
     );
 
 }
