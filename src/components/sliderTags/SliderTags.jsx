@@ -1,36 +1,43 @@
-import { Container } from '@mui/material'
-import { Button } from '@mui/material'
-import Chip from '@mui/material/Chip'
+import { Button, Container } from '@mui/material'
+
+
+
+import React,{ useState } from 'react'
+
 
 
 const SliderTags = () => {
-  const pages = ['Colors', 'Wallpapers', 'Experimental','Films','People']
-
-  const handleOpenTag = (event) => {
-    console.log(event)
-  }
-
+  const tags = ['Colors', 'Wallpapers', 'Experimental', 'Films','Flowers','Cars','Movies','SkateBoard','Games','birthday','Architecture','Fashion']
+  
+  const [tagName,setTag]=useState("")
+  
   return (
     <div>
-      <Container maxWidth="xl" sx={{marginTop:2}}>
-        {pages.map((page) => (
-            <Chip label={`#${page}`} sx={{marginRight:2 , marginBottom:1}}>
-              <Button
-                key={page}
-                onClick={handleOpenTag}
-                sx={{
-                  my: 2,
-                  color: 'black',
-                  display: 'block',
-                  textAlign: 'left',
-                }}
-              >
-                
-              </Button>
-            </Chip>
-        
+      <Container maxWidth="xl" sx={{ marginTop: 2 }}>
+        {tags.map((tag) => (
+          <Button
+            variant="outlined"
+            key={tag}
+            onClick={(e)=>{   setTag(e.currentTarget.value) }}
+            sx={{
+              textAlign: 'left',
+              marginRight: 2,
+              marginBottom:1,
+              borderRadius:200,
+              color:"black",
+              fontSize:12,
+              display:{xs:'none', md:'inline-block'}
+            }}
+          
+            value={tag}
+            label={`#${tag}`}
+          >{`#${tag}`}</Button>
         ))}
+        
       </Container>
+      
+      <h1>{tagName}</h1>
+    
     </div>
   )
 }
