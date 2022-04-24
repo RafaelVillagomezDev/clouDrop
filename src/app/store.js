@@ -6,6 +6,6 @@ import sliderImageReducer from '../features/sliderImage/sliderImageSlice';
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    sliderImage:sliderImageReducer
+    images:sliderImageReducer
   },
 });

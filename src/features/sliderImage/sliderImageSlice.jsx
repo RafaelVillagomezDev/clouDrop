@@ -1,28 +1,51 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
-import {fetchRamdomImage} from "./unplashAPI";
-
+import axios from "axios";
+const {REACT_APP_API_KEY_PRODUCTION,REACT_APP_BASE_URL}=process.env
 const initialState = {
-  value: 0,
-  status: 'idle',
+  images: [],
+  status: null,
 }
+
 
 //Peticion a la Api unplash para devolver imagenes ramdom
 export const getRamdomImageAsync = createAsyncThunk(
   'sliderImage/fetchRamdomImage',
-  async (amount) => {
-    const response = await fetchRamdomImage(amount)
-  
-    return response.data
-  },
-)
+  async ()=>{
+     return await axios.get(`${REACT_APP_BASE_URL}photos?page=2&client_id=${REACT_APP_API_KEY_PRODUCTION}`).then(
+       (res)=>res.data
+     );
+  }
+);
+//NO ENTIENDO POR QUE FALLA COMO LO TENIAN ANTES , IGUAL Q EL COUNTER
 
 export const sliderImageSlice = createSlice({
   name: 'sliderImage',
   initialState,
   reducers: {
+    //REDUCERS AQUI
+   
 
-  }
+  },
+   // extraReducers permite que el slice maneje acciones definidas en otro lugar ,
+  // esto incluyes acciones creadas con AsyncThunk en otros lugares.
+  extraReducers: (builder) => {
+    builder
+      .addCase(getRamdomImageAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getRamdomImageAsync.fulfilled, (state, action) => {
+        state.status = 'success';
+        state.images= action.payload;
+      }).addCase(getRamdomImageAsync.rejected,(state)=>{
+          state.status="failed"
+      });
+  },
 
 })
+
+
+
+
+// export const { setImageList } = sliderImageSlice.actions;
 
 export default sliderImageSlice.reducer
