@@ -10,7 +10,7 @@ const SliderTags = () => {
   const tags = ['Colors', 'Wallpapers', 'Experimental', 'Films','Flowers','Cars','Movies','SkateBoard','Games','birthday','Architecture','Fashion']
   
   const [tagName,setTag]=useState("")
-  
+
   return (
     <div>
       <Container maxWidth="xl" sx={{ marginTop: 2 }}>
@@ -37,7 +37,7 @@ const SliderTags = () => {
       </Container>
       
       <h1>{tagName}</h1>
-    
+      
     </div>
   )
 }

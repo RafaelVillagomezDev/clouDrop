@@ -10,9 +10,9 @@ const initialState = {
 //Peticion a la Api unplash para devolver imagenes ramdom
 export const getRamdomImageAsync = createAsyncThunk(
   'sliderImage/fetchRamdomImage',
-  async ()=>{
-     return await axios.get(`${REACT_APP_BASE_URL}photos?page=2&client_id=${REACT_APP_API_KEY_PRODUCTION}`).then(
-       (res)=>res.data
+  async (busqueda)=>{
+     return await axios.get(`${REACT_APP_BASE_URL}search/photos?query=${busqueda}&page=1&per_page=48&client_id=${REACT_APP_API_KEY_PRODUCTION}`).then(
+       (res)=>res.data.results
      );
   }
 );

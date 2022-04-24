@@ -6,12 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getRamdomImageAsync } from "./sliderImageSlice";
 
 export default function SliderImage() {
-
+ 
   const dispatch = useDispatch();
   const {images}=useSelector((state)=>state.images);
-
+  const busqueda="coches"
   useEffect(()=>{
-    dispatch(getRamdomImageAsync());
+    dispatch(getRamdomImageAsync(busqueda));
   },[dispatch])
 
     return (
