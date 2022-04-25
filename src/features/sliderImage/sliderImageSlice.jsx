@@ -1,6 +1,7 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
 import axios from "axios";
 const {REACT_APP_API_KEY_PRODUCTION,REACT_APP_BASE_URL}=process.env
+
 const initialState = {
   images: [],
   status: null,
@@ -11,6 +12,7 @@ const initialState = {
 export const getRamdomImageAsync = createAsyncThunk(
   'sliderImage/fetchRamdomImage',
   async (busqueda)=>{
+     
      return await axios.get(`${REACT_APP_BASE_URL}search/photos?query=${busqueda}&page=1&per_page=48&client_id=${REACT_APP_API_KEY_PRODUCTION}`).then(
        (res)=>res.data.results
      );

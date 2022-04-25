@@ -29,7 +29,8 @@ export default function SliderImage() {
           </ImageListItem>
         ))}
       </ImageList>
-      
+    
       );
+   
 }  
 
