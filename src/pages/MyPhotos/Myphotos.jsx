@@ -9,3 +9,5 @@ function Myphotos(){
     );
 
 }
+
+export default Myphotos;

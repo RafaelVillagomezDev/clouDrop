@@ -1,10 +1,11 @@
 import React from 'react'
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
-
+import {BrowserRouter as Router , Routes, Route } from 'react-router-dom';
 import './App.css'
 import Navbar from './components/navbar/Navbar'
 import Home from './pages/Home/Home'
+import Myphotos from './pages/MyPhotos/Myphotos';
 // import { ThemeProvider } from '@mui/material/styles'
 //Config theme Material Mui global
 // import theme from './themeConfig';
@@ -12,11 +13,17 @@ import Home from './pages/Home/Home'
 function App() {
   return (
     <>
-      {/* <ThemeProvider theme={theme}> */}
-        <Navbar />
-        <Home />
-        {/*<Counter /> */}
-      {/* </ThemeProvider> */}
+    
+      <Router>
+        <Navbar/>
+        <Routes>
+        <Route path="/"  element={<Home/>}/>
+        <Route path='/myphotos' element={<Myphotos/>}/> 
+        
+        </Routes>
+      
+      </Router>
+
     </>
   )
 }
