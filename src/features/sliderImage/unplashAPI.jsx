@@ -1,13 +1,14 @@
-// import axios from "axios";
+import axios from "axios";
+const {REACT_APP_API_KEY_PRODUCTION,REACT_APP_BASE_URL}=process.env
 
-// const {REACT_APP_API_KEY_PRODUCTION,REACT_APP_BASE_URL}=process.env
-
-// //Peticion api , debe devolver imagenes ramdom
-// export  async function fetchRamdomImage(page=1) {
+// //Peticion api , debe devolver imagenes 
+export  async function fetchImages(busqueda) {
   
-  
-//   await axios.get(`${REACT_APP_BASE_URL}photos?page=${page}&client_id=${REACT_APP_API_KEY_PRODUCTION}`).then((response)=>response.data)
-//   .catch((error)=>console.log(error))
+    return await axios.get(`${REACT_APP_BASE_URL}search/photos?query=${busqueda}&page=1&per_page=48&client_id=${REACT_APP_API_KEY_PRODUCTION}`).then(
+        (res)=>res.data.results
+      );
 
-// }
-// // xSiQBSq-I0M
+ }
+
+
+ 

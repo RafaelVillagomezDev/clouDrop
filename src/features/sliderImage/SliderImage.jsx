@@ -9,7 +9,7 @@ export default function SliderImage() {
  
   const dispatch = useDispatch();
   const {images}=useSelector((state)=>state.images);
-  const busqueda="coches"
+  const busqueda="motos"
   useEffect(()=>{
     dispatch(getRamdomImageAsync(busqueda));
   },[dispatch])
