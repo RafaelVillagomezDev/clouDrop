@@ -7,36 +7,38 @@ import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
-import CardMedia from '@mui/material/CardMedia';
+import CardMedia from '@mui/material/CardMedia'
 
 import Button from '@mui/material/Button'
 
 import MenuItem from '@mui/material/MenuItem'
-import images from "../../assets/images"
+import images from '../../assets/images'
+import { NavLink } from 'react-router-dom'
 
-const pages = ['Home', 'My Pages', 'Fav']
-
-
-
+const nav = [
+  { name: 'Home', link: '/' },
+  { name: 'My photos', link: '/myphotos' },
+]
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
- 
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
   }
-  
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
 
-  
+  let activeStyle = {
+    textDecoration: 'underline',
+  }
+
+  let activeClassName = 'underline'
 
   return (
-    
-    <AppBar position="static"   sx={{backgroundColor:'#fffcf9'}}>
+    <AppBar position="static" sx={{ backgroundColor: '#fffcf9' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -62,7 +64,7 @@ const Navbar = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon sx={{color:'black'}}/>
+              <MenuIcon sx={{ color: 'black' }} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -82,9 +84,21 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {nav.map((page) => (
+                // <MenuItem key={page} onClick={handleCloseNavMenu}>
+                //   <Typography textAlign="center">{page}</Typography>
+                // </MenuItem>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <NavLink
+                      to={page.link}
+                      style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                      }
+                    >
+                      {page.name}
+                    </NavLink>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -95,24 +109,43 @@ const Navbar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           ></Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex',justifyContent:'end' } }}>
-            {pages.map((page) => (
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex', justifyContent: 'end' },
+            }}
+          >
+            {nav.map((page) => (
               <Button
-                key={page}
+                key={page.name}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' , textAlign:'left' }}
+                sx={{
+                  my: 2,
+                  color: 'black',
+                  display: 'block',
+                  textAlign: 'left',
+                }}
               >
-                {page}
+                <NavLink
+                  to={page.link}
+                  className={({ isActive }) =>
+                    isActive ? activeClassName : undefined
+                  }
+                  
+                  end
+                >
+                  {page.name}
+                </NavLink>
               </Button>
             ))}
           </Box>
-          <Box sx={{flexGrow:0,display:{xs:'block', md:'none'}}}>
-              <CardMedia
-                  component="img"
-                  height="120"
-                  image={images.logo}
-                  alt="logo"
-                />
+          <Box sx={{ flexGrow: 0, display: { xs: 'block', md: 'none' } }}>
+            <CardMedia
+              component="img"
+              height="120"
+              image={images.logo}
+              alt="logo"
+            />
           </Box>
         </Toolbar>
       </Container>

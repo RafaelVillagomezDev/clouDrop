@@ -29,7 +29,7 @@ export default function SliderImage() {
 
   useEffect(() => {
     dispatch(getRamdomImageAsync(busqueda))
-  }, [searchValue])
+  }, [searchValue,dispatch,busqueda])
 
   return (
     <Container maxWidth="2xl">
@@ -52,7 +52,6 @@ export default function SliderImage() {
           <SearchIcon />
         </IconButton>
       </Paper>
-
       <ImageList
         sx={{ marginX: 2, marginTop: 6 }}
         variant="woven"
@@ -62,9 +61,9 @@ export default function SliderImage() {
         {images.map((item) => (
           <ImageListItem key={item.id}>
             <img
-              src={`${item.urls.full}`}
-              srcSet={`${item.urls.full}`}
-              alt={`${item.id}`}
+              src={`${item.urls.thumb}`}
+              srcSet={`${item.urls.thumb}`}
+              alt={`${item.alt_description}`}
               loading="lazy"
             />
             <ImageListItemBar

@@ -1,10 +1,16 @@
+
+import Footer from "../../components/footer/Footer";
+import SliderMyPhotos from "../../features/sliderMyPhotos/SliderMyPhotos";
+
+
 function Myphotos(){
 
     return (
 
-        <div>
-            <h1>Soy my photos</h1>
-        </div>
+       <>
+        <SliderMyPhotos/>
+        <Footer/>
+       </>
 
     );
 
