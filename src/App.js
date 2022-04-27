@@ -18,6 +18,7 @@ function App() {
         <Navbar/>
         <Routes>
         <Route path="/"  element={<Home/>}/>
+        <Route path='/clouDrop' element={<Home/>}/>
         <Route path='/myphotos' element={<Myphotos/>}/> 
         
         </Routes>

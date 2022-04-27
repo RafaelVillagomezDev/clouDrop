@@ -1,21 +1,18 @@
-import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-
-import { fetchImages } from './unplashAPI';
+import { fetchImages } from './unplashAPI'
 const initialState = {
   images: [],
   status: null,
 }
 
-
 //Funcion asincrona me devuelve lista de imagenes
 export const getRamdomImageAsync = createAsyncThunk(
   'sliderImage/fetchRamdomImage',
-  async (busqueda)=>{
-     
-     return await fetchImages(busqueda)
-  }
-);
+  async (busqueda) => {
+    return await fetchImages(busqueda)
+  },
+)
 //NO ENTIENDO POR QUE FALLA COMO LO TENIAN ANTES , IGUAL Q EL COUNTER
 
 export const sliderImageSlice = createSlice({
@@ -23,28 +20,23 @@ export const sliderImageSlice = createSlice({
   initialState,
   reducers: {
     //REDUCERS AQUI
-   
-
   },
-   // extraReducers permite que el slice maneje acciones definidas en otro lugar ,
+  // extraReducers permite que el slice maneje acciones definidas en otro lugar ,
   // esto incluyes acciones creadas con AsyncThunk en otros lugares.
   extraReducers: (builder) => {
     builder
       .addCase(getRamdomImageAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = 'loading'
       })
       .addCase(getRamdomImageAsync.fulfilled, (state, action) => {
-        state.status = 'success';
-        state.images= action.payload;
-      }).addCase(getRamdomImageAsync.rejected,(state)=>{
-          state.status="failed"
-      });
+        state.status = 'success'
+        state.images = action.payload
+      })
+      .addCase(getRamdomImageAsync.rejected, (state) => {
+        state.status = 'failed'
+      })
   },
-
 })
-
-
-
 
 // export const { setImageList } = sliderImageSlice.actions;
 
