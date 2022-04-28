@@ -4,11 +4,12 @@ import ImageListItem from '@mui/material/ImageListItem'
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getRamdomImageAsync } from './sliderImageSlice'
-import IconButton from '@mui/material/IconButton'
+import Paper from '@mui/material/Paper'
 import InputBase from '@mui/material/InputBase'
+import { IconButton } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import { addImage } from './sliderImageSlice'
-import Search from '../../components/search/Search'
 
 export default function SliderImage() {
   const [searchValue, setSearchValue] = useState('')
@@ -20,36 +21,53 @@ export default function SliderImage() {
     setSearchValue(e.currentTarget.value)
   }
 
-  const handleAddFav = (item) => {
-    const newItem = {
-      id: item.id,
-      description: item.description,
-      width: item.width,
-      height: item.height,
-      likes: item.likes,
-      thumb: item.urls.thumb,
-      full: item.urls.full,
-      date: new Date().toLocaleDateString(),
+  const handleAddFav=(item)=>{
+    
+    const newItem={
+
+      id:item.id,
+      description:item.description,
+      width:item.width,
+      height:item.height,
+      likes:item.likes,
+      thumb:item.urls.thumb,
+      full:item.urls.full,
+      date:new Date().toLocaleDateString()
     }
+
+   
+
 
     dispatch(addImage(newItem))
   }
-
+  
   const busqueda = searchValue === '' ? 'motos' : searchValue
 
   useEffect(() => {
     dispatch(getRamdomImageAsync(busqueda))
   }, [searchValue, dispatch, busqueda])
 
+ 
   return (
     <Container maxWidth="2xl">
-      <Search>
+      <Paper
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          minWidth: 'xs',
+          maxWidth: 'md',
+          margin: 'auto',
+        }}
+      >
         <InputBase
           sx={{ ml: 2, flex: 1, color: 'black' }}
           placeholder="Search things ..."
           onChange={handleChange}
         />
-      </Search>
+        <IconButton type="submit" sx={{ padding: '12px' }} aria-label="search">
+          <SearchIcon />
+        </IconButton>
+      </Paper>
       <ImageList
         sx={{ marginX: 2, marginTop: 6 }}
         variant="woven"
@@ -77,7 +95,7 @@ export default function SliderImage() {
                 <IconButton
                   sx={{ color: 'white' }}
                   aria-label={`star ${item.title}`}
-                  onClick={() => handleAddFav(item)}
+                  onClick={()=>handleAddFav(item)}
                 >
                   <AddAPhotoIcon />
                 </IconButton>
@@ -86,6 +104,7 @@ export default function SliderImage() {
             />
           </ImageListItem>
         ))}
+        {console.log(images.id)}
       </ImageList>
     </Container>
   )

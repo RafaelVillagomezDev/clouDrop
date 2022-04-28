@@ -23,7 +23,7 @@ export const getRamdomImageAsync = createAsyncThunk(
 
 const initialState = {
   images: [],
-  myImages: getImageObjectStorage(),
+  myImages: [getImageObjectStorage()],
   status: null,
 }
 
@@ -32,8 +32,9 @@ export const sliderImageSlice = createSlice({
   initialState,
   reducers: {
     addImage: (state, action) => {
-      state.myImages.push(action.payload)
+      console.log(state,action)
       saveImageObjectStorage(action.payload)
+     return state.myImages.concat(action.payload)
     },
   },
 
