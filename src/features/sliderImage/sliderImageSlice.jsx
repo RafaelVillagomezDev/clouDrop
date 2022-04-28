@@ -1,9 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import { fetchImages } from './unplashAPI'
-const initialState = {
-  images: [],
-  status: null,
+
+function getImageObjectStorage () {
+  if (localStorage.getItem('imageObject')) {
+    return JSON.parse(localStorage.getItem('imageObject'))
+  }
+  return []
+}
+
+function saveImageObjectStorage (images) {
+  localStorage.setItem('imagesObject', JSON.stringify(images))
 }
 
 //Funcion asincrona me devuelve lista de imagenes
@@ -13,14 +20,23 @@ export const getRamdomImageAsync = createAsyncThunk(
     return await fetchImages(busqueda)
   },
 )
-//NO ENTIENDO POR QUE FALLA COMO LO TENIAN ANTES , IGUAL Q EL COUNTER
+
+const initialState = {
+  images: [],
+  myImages: getImageObjectStorage(),
+  status: null,
+}
 
 export const sliderImageSlice = createSlice({
   name: 'sliderImage',
   initialState,
   reducers: {
-    //REDUCERS AQUI
+    addImage: (state, action) => {
+      state.myImages.push(action.payload)
+      saveImageObjectStorage(action.payload)
+    },
   },
+
   // extraReducers permite que el slice maneje acciones definidas en otro lugar ,
   // esto incluyes acciones creadas con AsyncThunk en otros lugares.
   extraReducers: (builder) => {
@@ -38,6 +54,6 @@ export const sliderImageSlice = createSlice({
   },
 })
 
-// export const { setImageList } = sliderImageSlice.actions;
+export const { addImage} = sliderImageSlice.actions
 
 export default sliderImageSlice.reducer

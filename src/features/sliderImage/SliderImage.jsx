@@ -8,12 +8,10 @@ import Paper from '@mui/material/Paper'
 import InputBase from '@mui/material/InputBase'
 import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
+import { addImage } from './sliderImageSlice'
 
 export default function SliderImage() {
-
-
-
   const [searchValue, setSearchValue] = useState('')
 
   const dispatch = useDispatch()
@@ -23,24 +21,42 @@ export default function SliderImage() {
     setSearchValue(e.currentTarget.value)
   }
 
-  
+  const handleAddFav=(item)=>{
+    
+    const newItem={
 
+      id:item.id,
+      description:item.description,
+      width:item.width,
+      height:item.height,
+      likes:item.likes,
+      thumb:item.urls.thumb,
+      full:item.urls.full,
+      date:new Date().toLocaleDateString()
+    }
+
+   
+
+
+    dispatch(addImage(newItem))
+  }
+  
   const busqueda = searchValue === '' ? 'motos' : searchValue
 
   useEffect(() => {
     dispatch(getRamdomImageAsync(busqueda))
-  }, [searchValue,dispatch,busqueda])
+  }, [searchValue, dispatch, busqueda])
 
+ 
   return (
     <Container maxWidth="2xl">
       <Paper
         sx={{
           display: 'flex',
           alignItems: 'center',
-          minWidth:'xs',
-          maxWidth:'md',
-        
-          margin: 'auto'
+          minWidth: 'xs',
+          maxWidth: 'md',
+          margin: 'auto',
         }}
       >
         <InputBase
@@ -73,13 +89,15 @@ export default function SliderImage() {
                   'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
               }}
               title={item.title}
+              key={item.id}
               position="top"
               actionIcon={
                 <IconButton
                   sx={{ color: 'white' }}
                   aria-label={`star ${item.title}`}
+                  onClick={()=>handleAddFav(item)}
                 >
-                <AddAPhotoIcon />
+                  <AddAPhotoIcon />
                 </IconButton>
               }
               actionPosition="left"
