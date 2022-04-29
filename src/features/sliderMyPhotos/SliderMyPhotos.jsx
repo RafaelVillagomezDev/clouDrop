@@ -2,18 +2,30 @@ import { Container, IconButton, InputBase, Paper } from '@mui/material'
 
 import SearchIcon from '@mui/icons-material/Search'
 import { ImageList } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ImageListItemBar } from '@mui/material'
 import { ImageListItem } from '@mui/material'
-
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
-
-import { favImages } from '../sliderImage/sliderImageSlice'
+import EditIcon from '@mui/icons-material/Edit'
+import FileDownloadSharpIcon from '@mui/icons-material/FileDownloadSharp'
+import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import { favImages, findImageFav } from '../sliderImage/sliderImageSlice'
+import { useEffect, useState } from 'react'
 
 export default function SliderMyPhotos() {
-  // const dispatch = useDispatch()
+  const [searchDescription, setSearchDescription] = useState()
 
-  const  images  = useSelector(favImages)
+  const handleSearchDescription = (e) => {
+    setSearchDescription(e.currentTarget.value)
+  }
+
+  const images = useSelector(favImages)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(findImageFav(searchDescription))
+  }, [searchDescription])
 
   return (
     <Container maxWidth="2xl">
@@ -30,12 +42,13 @@ export default function SliderMyPhotos() {
         <InputBase
           sx={{ ml: 2, flex: 1, color: 'black' }}
           placeholder="Search images by description ..."
+          onChange={handleSearchDescription}
         />
         <IconButton type="submit" sx={{ padding: '12px' }} aria-label="search">
           <SearchIcon />
         </IconButton>
       </Paper>
-
+      <h1>{searchDescription}</h1>
       <ImageList
         sx={{ marginX: 2, marginTop: 6 }}
         variant="woven"
@@ -51,20 +64,54 @@ export default function SliderMyPhotos() {
               loading="lazy"
             />
             <ImageListItemBar
-              sx={{
-                background:
-                  'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-                  'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-              }}
-              title={item.title}
-              key={item.id}
               position="top"
+              title={item.description}
+              actionIcon={
+                <div>
+                  <IconButton
+                    sx={{ color: 'white' }}
+                    aria-label={`info about `}
+                  >
+                    <FileDownloadSharpIcon
+                      sx={{ color: 'white' }}
+                      aria-label={`star `}
+                    />
+                  </IconButton>
+                  <IconButton
+                    sx={{ color: 'white' }}
+                    aria-label={`info about `}
+                  >
+                    <EditIcon sx={{ color: 'white' }} aria-label={`star `} />
+                  </IconButton>
+                  <IconButton
+                    sx={{ color: 'white' }}
+                    aria-label={`info about `}
+                  >
+                    <DeleteOutlineSharpIcon
+                      sx={{ color: 'white' }}
+                      aria-label={`star `}
+                    />
+                  </IconButton>
+                </div>
+              }
+              actionPosition="right"
+            />
+
+            <ImageListItemBar
+              position="bottom"
+              subtitle={
+                <div>
+                  <h3>Width : {item.width}px</h3>
+                  <h3>Height : {item.height} px</h3> <h3> Date: {item.date}</h3>
+                </div>
+              }
               actionIcon={
                 <IconButton
-                  sx={{ color: 'white' }}
-                  aria-label={`star ${item.title}`}
+                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                  aria-label={`info about ${item.description}`}
                 >
-                  <AddAPhotoIcon />
+                  <FavoriteIcon color="error" />
+                  <h4>{item.likes}</h4>
                 </IconButton>
               }
               actionPosition="left"

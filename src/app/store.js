@@ -5,6 +5,7 @@ import sliderImageReducer from '../features/sliderImage/sliderImageSlice';
 // import sliderMyPhotosReducer from '../features/sliderMyPhotos/sliderMyPhotosSlice'
 
 
+
 export const store = configureStore({
   reducer: {
     
