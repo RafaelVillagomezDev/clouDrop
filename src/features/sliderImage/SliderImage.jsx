@@ -9,13 +9,15 @@ import InputBase from '@mui/material/InputBase'
 import { IconButton } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
-import { addImage } from './sliderImageSlice'
+import { addImage }  from './sliderImageSlice'
+
 
 export default function SliderImage() {
   const [searchValue, setSearchValue] = useState('')
 
   const dispatch = useDispatch()
   const { images } = useSelector((state) => state.images)
+  
 
   const handleChange = (e) => {
     setSearchValue(e.currentTarget.value)
@@ -32,7 +34,7 @@ export default function SliderImage() {
       likes:item.likes,
       thumb:item.urls.thumb,
       full:item.urls.full,
-      date:new Date().toLocaleDateString()
+      date:new Date().toISOString()
     }
 
    
@@ -104,7 +106,7 @@ export default function SliderImage() {
             />
           </ImageListItem>
         ))}
-        {console.log(images.id)}
+        
       </ImageList>
     </Container>
   )

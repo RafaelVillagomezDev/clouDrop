@@ -8,49 +8,45 @@ import { ImageListItem } from '@mui/material'
 
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 
-
-
+import { favImages } from '../sliderImage/sliderImageSlice'
 
 export default function SliderMyPhotos() {
+  // const dispatch = useDispatch()
 
-// const dispatch = useDispatch()
-const  myImages= useSelector((state) => state.myImages)
-
+  const  images  = useSelector(favImages)
 
   return (
     <Container maxWidth="2xl">
-       <Paper
+      <Paper
         sx={{
           display: 'flex',
           alignItems: 'center',
           minWidth: 'xs',
           maxWidth: 'md',
           margin: 'auto',
-          marginTop:5
+          marginTop: 5,
         }}
       >
         <InputBase
           sx={{ ml: 2, flex: 1, color: 'black' }}
           placeholder="Search images by description ..."
-
         />
         <IconButton type="submit" sx={{ padding: '12px' }} aria-label="search">
           <SearchIcon />
         </IconButton>
       </Paper>
 
-       <ImageList
+      <ImageList
         sx={{ marginX: 2, marginTop: 6 }}
         variant="woven"
         cols={4}
         gap={12}
-      >  
-           {console.log(myImages)}
-         {myImages && myImages.map((item) => (
+      >
+        {images.map((item) => (
           <ImageListItem key={item.id}>
             <img
-              src={`${item.urls.thumb}`}
-              srcSet={`${item.urls.thumb}`}
+              src={`${item.thumb}`}
+              srcSet={`${item.thumb}`}
               alt={`${item.alt_description}`}
               loading="lazy"
             />
@@ -67,7 +63,6 @@ const  myImages= useSelector((state) => state.myImages)
                 <IconButton
                   sx={{ color: 'white' }}
                   aria-label={`star ${item.title}`}
-
                 >
                   <AddAPhotoIcon />
                 </IconButton>
@@ -75,11 +70,8 @@ const  myImages= useSelector((state) => state.myImages)
               actionPosition="left"
             />
           </ImageListItem>
-        ))} 
-
-
-       </ImageList> 
-
+        ))}
+      </ImageList>
     </Container>
   )
 }

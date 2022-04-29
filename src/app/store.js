@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import counterReducer from '../features/counter/counterSlice';
+// import counterReducer from '../features/counter/counterSlice';
 import sliderImageReducer from '../features/sliderImage/sliderImageSlice';
-
+// import sliderMyPhotosReducer from '../features/sliderMyPhotos/sliderMyPhotosSlice'
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    
     images:sliderImageReducer,
+    // myImages:sliderMyPhotosReducer
     
   },
   middleware: getDefaultMiddleware =>

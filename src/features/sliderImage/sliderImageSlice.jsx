@@ -2,16 +2,20 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import { fetchImages } from './unplashAPI'
 
-function getImageObjectStorage () {
+
+
+function getImageObjectStorage() {
   if (localStorage.getItem('imageObject')) {
     return JSON.parse(localStorage.getItem('imageObject'))
+
   }
   return []
 }
 
-function saveImageObjectStorage (images) {
+function saveImageObjectStorage(images) {
   localStorage.setItem('imagesObject', JSON.stringify(images))
 }
+
 
 //Funcion asincrona me devuelve lista de imagenes
 export const getRamdomImageAsync = createAsyncThunk(
@@ -23,20 +27,23 @@ export const getRamdomImageAsync = createAsyncThunk(
 
 const initialState = {
   images: [],
-  myImages: [getImageObjectStorage()],
+  myImages: getImageObjectStorage(),
   status: null,
 }
 
 export const sliderImageSlice = createSlice({
   name: 'sliderImage',
   initialState,
-  reducers: {
-    addImage: (state, action) => {
-      console.log(state,action)
-      saveImageObjectStorage(action.payload)
-     return state.myImages.concat(action.payload)
+ 
+    reducers: {
+      addImage: (state, action) => {
+        
+        saveImageObjectStorage(action.payload)
+        state.myImages=[...state.myImages,action.payload]
+    
+      },
     },
-  },
+  
 
   // extraReducers permite que el slice maneje acciones definidas en otro lugar ,
   // esto incluyes acciones creadas con AsyncThunk en otros lugares.
@@ -55,6 +62,7 @@ export const sliderImageSlice = createSlice({
   },
 })
 
-export const { addImage} = sliderImageSlice.actions
 
 export default sliderImageSlice.reducer
+export const  favImages=(state)=> state.images.myImages
+export const { addImage } = sliderImageSlice.actions
