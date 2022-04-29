@@ -14,6 +14,7 @@ function getImageObjectStorage() {
 
 function saveImageObjectStorage(images) {
   localStorage.setItem('imagesObject', JSON.stringify(images))
+  
 }
 
 
@@ -37,14 +38,16 @@ export const sliderImageSlice = createSlice({
  
     reducers: {
       addImage: (state, action) => {
-        
-        saveImageObjectStorage(action.payload)
+
         state.myImages=[...state.myImages,action.payload]
+      
+        saveImageObjectStorage(state.myImages)
     
+         
       },
     },
   
-
+    
   // extraReducers permite que el slice maneje acciones definidas en otro lugar ,
   // esto incluyes acciones creadas con AsyncThunk en otros lugares.
   extraReducers: (builder) => {
