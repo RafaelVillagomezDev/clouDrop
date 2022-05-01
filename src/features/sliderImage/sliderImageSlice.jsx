@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
 import { fetchImages } from './unplashAPI'
 
 //Funcion que me devuelve un array de objetos de mi local Storage
@@ -35,6 +34,7 @@ export const sliderImageSlice = createSlice({
   reducers: {
     addImage: (state, action) => {
       //Metodo para que no se repitan imagenes y se almacenen en el local Storage
+      
       state.myImages = state.myImages.filter(
         (img) =>
           !JSON.stringify(img.id)
@@ -45,8 +45,13 @@ export const sliderImageSlice = createSlice({
 
       saveImageObjectStorage(state.myImages)
     },
-    deleteImage:()=>{
-      console.log("borrar")
+    deleteImage:(state,action)=>{
+      
+      const pos=state.myImages.findIndex((img)=>img.id===action.payload)
+      state.myImages.splice(pos,1)
+      Object.entries(state.myImages)
+      saveImageObjectStorage(state.myImages)
+      
     }
   },
 
