@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { fetchImages } from './unplashAPI'
+import { fetchImages, fetchDowloadImage } from './unplashAPI'
 
 //Funcion que me devuelve un array de objetos de mi local Storage
 function getImageObjectStorage() {
@@ -19,6 +19,13 @@ export const getRamdomImageAsync = createAsyncThunk(
   async (busqueda) => {
     return await fetchImages(busqueda)
   },
+)
+//Funcion asincrona para descargar imagenes mediante Api de unplash usando js-file
+export const dowloadImage=createAsyncThunk(
+  'dowloadImage',
+  async(objeto)=> {
+    return await fetchDowloadImage(objeto)
+  }
 )
 
 const initialState = {
@@ -54,7 +61,9 @@ export const sliderImageSlice = createSlice({
       Object.entries(state.myImages)
       saveImageObjectStorage(state.myImages)
       
-    }
+    },
+
+  
   },
 
   // extraReducers permite que el slice maneje acciones definidas en otro lugar ,

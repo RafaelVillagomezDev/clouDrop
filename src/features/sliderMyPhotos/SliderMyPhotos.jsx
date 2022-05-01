@@ -9,7 +9,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import FileDownloadSharpIcon from '@mui/icons-material/FileDownloadSharp'
 import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import { deleteImage, favImages } from '../sliderImage/sliderImageSlice'
+import { deleteImage, dowloadImage, favImages } from '../sliderImage/sliderImageSlice'
 import { useState } from 'react'
 
 export default function SliderMyPhotos() {
@@ -28,6 +28,13 @@ export default function SliderMyPhotos() {
 
    dispath(deleteImage(idBuscar))
 
+  }
+
+  
+  const handleDowloadImage=(urlImage,nameImage)=>{
+    
+    const obj={url:urlImage,name:nameImage}
+    dispath(dowloadImage(obj))
   }
 
   
@@ -86,7 +93,7 @@ export default function SliderMyPhotos() {
                   <IconButton
                     sx={{ color: 'white' }}
                     aria-label={`info about `}
-                    
+                    onClick={()=>handleDowloadImage(item.full,item.description==null?"image":item.description.toLocaleLowerCase())}
                   >
                     <FileDownloadSharpIcon
                       sx={{ color: 'white' }}
