@@ -9,43 +9,40 @@ import EditIcon from '@mui/icons-material/Edit'
 import FileDownloadSharpIcon from '@mui/icons-material/FileDownloadSharp'
 import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import { deleteImage, dowloadImage, favImages } from '../sliderImage/sliderImageSlice'
+import {
+  deleteImage,
+  dowloadImage,
+  favImages,
+} from '../sliderImage/sliderImageSlice'
 import { useState } from 'react'
 
 export default function SliderMyPhotos() {
-
   const [searchDescription, setSearchDescription] = useState('')
 
-  
   const handleSearchDescription = (e) => {
     setSearchDescription(e.currentTarget.value)
   }
 
-  const dispath=useDispatch();
+  const dispath = useDispatch()
   const images = useSelector(favImages)
-  
-  const handleDeleteImage=(idBuscar)=>{
 
-   dispath(deleteImage(idBuscar))
-
+  const handleDeleteImage = (idBuscar) => {
+    dispath(deleteImage(idBuscar))
   }
 
-  
-  const handleDowloadImage=(urlImage,nameImage)=>{
-    
-    const obj={url:urlImage,name:nameImage}
+  const handleDowloadImage = (urlImage, nameImage) => {
+    const obj = { url: urlImage, name: nameImage }
     dispath(dowloadImage(obj))
   }
 
-  
   //Metdo filtra las fotos segun la descripcion siempre y cuando haya una descripcion con mas de un caracter , me las filtra en minusculas
   const filteredPhotos = searchDescription.length
     ? images.filter((img) =>
         JSON.stringify(img.description)
           .toLocaleLowerCase()
-          .includes(searchDescription.toLocaleLowerCase())
+          .includes(searchDescription.toLocaleLowerCase()),
       )
-    : images;
+    : images
 
   return (
     <Container maxWidth="2xl">
@@ -76,7 +73,6 @@ export default function SliderMyPhotos() {
         cols={4}
         gap={12}
       >
-        
         {filteredPhotos.map((item) => (
           <ImageListItem key={item.id}>
             <img
@@ -93,7 +89,14 @@ export default function SliderMyPhotos() {
                   <IconButton
                     sx={{ color: 'white' }}
                     aria-label={`info about `}
-                    onClick={()=>handleDowloadImage(item.full,item.description==null?"image":item.description.toLocaleLowerCase())}
+                    onClick={() =>
+                      handleDowloadImage(
+                        item.full,
+                        item.description == null
+                          ? 'image'
+                          : item.description.toLocaleLowerCase(),
+                      )
+                    }
                   >
                     <FileDownloadSharpIcon
                       sx={{ color: 'white' }}
@@ -109,12 +112,11 @@ export default function SliderMyPhotos() {
                   <IconButton
                     sx={{ color: 'white' }}
                     aria-label={`info about `}
-                    onClick={()=>handleDeleteImage(item.id)}
+                    onClick={() => handleDeleteImage(item.id)}
                   >
                     <DeleteOutlineSharpIcon
                       sx={{ color: 'white' }}
                       aria-label={`star `}
-                     
                     />
                   </IconButton>
                 </div>

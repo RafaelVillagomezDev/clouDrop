@@ -21,12 +21,9 @@ export const getRamdomImageAsync = createAsyncThunk(
   },
 )
 //Funcion asincrona para descargar imagenes mediante Api de unplash usando js-file
-export const dowloadImage=createAsyncThunk(
-  'dowloadImage',
-  async(objeto)=> {
-    return await fetchDowloadImage(objeto)
-  }
-)
+export const dowloadImage = createAsyncThunk('dowloadImage', async (objeto) => {
+  return await fetchDowloadImage(objeto)
+})
 
 const initialState = {
   images: [],
@@ -41,7 +38,7 @@ export const sliderImageSlice = createSlice({
   reducers: {
     addImage: (state, action) => {
       //Metodo para que no se repitan imagenes y se almacenen en el local Storage
-      
+
       state.myImages = state.myImages.filter(
         (img) =>
           !JSON.stringify(img.id)
@@ -52,18 +49,15 @@ export const sliderImageSlice = createSlice({
 
       saveImageObjectStorage(state.myImages)
     },
-    deleteImage:(state,action)=>{
-      //Metodo para borrar imagenes dado click al evento , surge el problema de que estas imagenes son un objeto he de 
-      //ahi el Object entries para transformarlas a un array . Tambien hay otro problema son mutables debido al estado 
+    deleteImage: (state, action) => {
+      //Metodo para borrar imagenes dado click al evento , surge el problema de que estas imagenes son un objeto he de
+      //ahi el Object entries para transformarlas a un array . Tambien hay otro problema son mutables debido al estado
       //No ponerlas en constantes o variables , queremos modificar el estado , ojito a la direccion de memoria donde apunta .
-      const pos=state.myImages.findIndex((img)=>img.id===action.payload)
-      state.myImages.splice(pos,1)
+      const pos = state.myImages.findIndex((img) => img.id === action.payload)
+      state.myImages.splice(pos, 1)
       Object.entries(state.myImages)
       saveImageObjectStorage(state.myImages)
-      
     },
-
-  
   },
 
   // extraReducers permite que el slice maneje acciones definidas en otro lugar ,
@@ -86,4 +80,4 @@ export const sliderImageSlice = createSlice({
 export default sliderImageSlice.reducer
 //Constante me devuleve mi array de imagenes del estado
 export const favImages = (state) => state.images.myImages
-export const { addImage,deleteImage } = sliderImageSlice.actions
+export const { addImage, deleteImage } = sliderImageSlice.actions
