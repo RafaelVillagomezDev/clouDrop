@@ -45,6 +45,9 @@ export const sliderImageSlice = createSlice({
 
       saveImageObjectStorage(state.myImages)
     },
+    deleteImage:()=>{
+      console.log("borrar")
+    }
   },
 
   // extraReducers permite que el slice maneje acciones definidas en otro lugar ,
@@ -67,4 +70,4 @@ export const sliderImageSlice = createSlice({
 export default sliderImageSlice.reducer
 //Constante me devuleve mi array de imagenes del estado
 export const favImages = (state) => state.images.myImages
-export const { addImage } = sliderImageSlice.actions
+export const { addImage,deleteImage } = sliderImageSlice.actions

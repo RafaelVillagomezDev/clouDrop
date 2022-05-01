@@ -2,32 +2,43 @@ import { Container, IconButton, InputBase, Paper } from '@mui/material'
 
 import SearchIcon from '@mui/icons-material/Search'
 import { ImageList } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ImageListItemBar } from '@mui/material'
 import { ImageListItem } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import FileDownloadSharpIcon from '@mui/icons-material/FileDownloadSharp'
 import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import { favImages } from '../sliderImage/sliderImageSlice'
+import { deleteImage, favImages } from '../sliderImage/sliderImageSlice'
 import { useState } from 'react'
 
 export default function SliderMyPhotos() {
+
   const [searchDescription, setSearchDescription] = useState('')
 
+  
   const handleSearchDescription = (e) => {
     setSearchDescription(e.currentTarget.value)
   }
 
+  const dispath=useDispatch();
   const images = useSelector(favImages)
+  
+  const handleDeleteImage=(idBuscar)=>{
+
+   dispath(deleteImage(idBuscar))
+
+  }
+
+  
   //Metdo filtra las fotos segun la descripcion siempre y cuando haya una descripcion con mas de un caracter , me las filtra en minusculas
   const filteredPhotos = searchDescription.length
     ? images.filter((img) =>
         JSON.stringify(img.description)
           .toLocaleLowerCase()
-          .includes(searchDescription.toLocaleLowerCase()),
+          .includes(searchDescription.toLocaleLowerCase())
       )
-    : images
+    : images;
 
   return (
     <Container maxWidth="2xl">
@@ -52,13 +63,13 @@ export default function SliderMyPhotos() {
         </IconButton>
       </Paper>
       <h1>{searchDescription.toLocaleUpperCase()}</h1>
-
       <ImageList
         sx={{ marginX: 2, marginTop: 6 }}
         variant="woven"
         cols={4}
         gap={12}
       >
+        
         {filteredPhotos.map((item) => (
           <ImageListItem key={item.id}>
             <img
@@ -75,6 +86,7 @@ export default function SliderMyPhotos() {
                   <IconButton
                     sx={{ color: 'white' }}
                     aria-label={`info about `}
+                    
                   >
                     <FileDownloadSharpIcon
                       sx={{ color: 'white' }}
@@ -90,10 +102,12 @@ export default function SliderMyPhotos() {
                   <IconButton
                     sx={{ color: 'white' }}
                     aria-label={`info about `}
+                    onClick={()=>handleDeleteImage(item.id)}
                   >
                     <DeleteOutlineSharpIcon
                       sx={{ color: 'white' }}
                       aria-label={`star `}
+                     
                     />
                   </IconButton>
                 </div>
