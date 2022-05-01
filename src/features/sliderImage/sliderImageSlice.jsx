@@ -46,7 +46,9 @@ export const sliderImageSlice = createSlice({
       saveImageObjectStorage(state.myImages)
     },
     deleteImage:(state,action)=>{
-      
+      //Metodo para borrar imagenes dado click al evento , surge el problema de que estas imagenes son un objeto he de 
+      //ahi el Object entries para transformarlas a un array . Tambien hay otro problema son mutables debido al estado 
+      //No ponerlas en constantes o variables , queremos modificar el estado , ojito a la direccion de memoria donde apunta .
       const pos=state.myImages.findIndex((img)=>img.id===action.payload)
       state.myImages.splice(pos,1)
       Object.entries(state.myImages)
