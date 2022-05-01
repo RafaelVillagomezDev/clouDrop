@@ -6,7 +6,7 @@ function getImageObjectStorage() {
   if (localStorage.getItem('imageObject')) {
     return JSON.parse(localStorage.getItem('imageObject'))
   }
-  return []
+    return []
 }
 
 function saveImageObjectStorage(images) {
@@ -40,11 +40,7 @@ export const sliderImageSlice = createSlice({
       saveImageObjectStorage(state.myImages)
     },
 
-    findImageFav: (state, action) => {
-      
-       console.log("oka")
-     
-    },
+   
   },
 
   // extraReducers permite que el slice maneje acciones definidas en otro lugar ,
@@ -66,4 +62,4 @@ export const sliderImageSlice = createSlice({
 
 export default sliderImageSlice.reducer
 export const favImages = (state) => state.images.myImages
-export const { addImage, findImageFav } = sliderImageSlice.actions
+export const { addImage } = sliderImageSlice.actions

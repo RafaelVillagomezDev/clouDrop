@@ -57,6 +57,7 @@ export default function SliderImage() {
           sx={{ ml: 2, flex: 1, color: 'black' }}
           placeholder="Search things ..."
           onChange={handleChange}
+          value={searchValue}
         />
         <IconButton type="submit" sx={{ padding: '12px' }} aria-label="search">
           <SearchIcon />

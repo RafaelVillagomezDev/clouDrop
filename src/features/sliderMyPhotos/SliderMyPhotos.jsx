@@ -2,32 +2,35 @@ import { Container, IconButton, InputBase, Paper } from '@mui/material'
 
 import SearchIcon from '@mui/icons-material/Search'
 import { ImageList } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
 import { ImageListItemBar } from '@mui/material'
 import { ImageListItem } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import FileDownloadSharpIcon from '@mui/icons-material/FileDownloadSharp'
 import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import { favImages, findImageFav } from '../sliderImage/sliderImageSlice'
-import { useEffect, useState } from 'react'
+import { favImages } from '../sliderImage/sliderImageSlice'
+import { useState } from 'react'
 
 export default function SliderMyPhotos() {
-  const [searchDescription, setSearchDescription] = useState()
+  const [searchDescription, setSearchDescription] = useState('')
 
   const handleSearchDescription = (e) => {
     setSearchDescription(e.currentTarget.value)
   }
 
+  
+
+  
+
+ 
+ 
   const images = useSelector(favImages)
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(findImageFav(searchDescription))
-  }, [searchDescription])
+  
+  const filteredPhotos = searchDescription.length ? images.filter((img)=>JSON.stringify(img.description).toLocaleLowerCase().includes(searchDescription.toLocaleLowerCase())) : images;
 
   return (
+
     <Container maxWidth="2xl">
       <Paper
         sx={{
@@ -42,20 +45,24 @@ export default function SliderMyPhotos() {
         <InputBase
           sx={{ ml: 2, flex: 1, color: 'black' }}
           placeholder="Search images by description ..."
+          value={searchDescription}
           onChange={handleSearchDescription}
         />
         <IconButton type="submit" sx={{ padding: '12px' }} aria-label="search">
           <SearchIcon />
         </IconButton>
       </Paper>
-      <h1>{searchDescription}</h1>
+      <h1>{searchDescription.toLocaleUpperCase()}</h1>
+      
+
       <ImageList
         sx={{ marginX: 2, marginTop: 6 }}
         variant="woven"
         cols={4}
         gap={12}
       >
-        {images.map((item) => (
+        {filteredPhotos.map((item) => (
+         
           <ImageListItem key={item.id}>
             <img
               src={`${item.thumb}`}
@@ -114,9 +121,13 @@ export default function SliderMyPhotos() {
                   <h4>{item.likes}</h4>
                 </IconButton>
               }
-              actionPosition="left"
+              actionPosition="right"
             />
+            <Container>
+             {console.log(filteredPhotos)}
+           </Container>
           </ImageListItem>
+           
         ))}
       </ImageList>
     </Container>
