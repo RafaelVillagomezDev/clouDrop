@@ -2,7 +2,7 @@ import { Container, IconButton, InputBase, Paper } from '@mui/material'
 
 import SearchIcon from '@mui/icons-material/Search'
 import { ImageList } from '@mui/material'
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { ImageListItemBar } from '@mui/material'
 import { ImageListItem } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
@@ -19,18 +19,17 @@ export default function SliderMyPhotos() {
     setSearchDescription(e.currentTarget.value)
   }
 
-  
-
-  
-
- 
- 
   const images = useSelector(favImages)
-  
-  const filteredPhotos = searchDescription.length ? images.filter((img)=>JSON.stringify(img.description).toLocaleLowerCase().includes(searchDescription.toLocaleLowerCase())) : images;
+  //Metdo filtra las fotos segun la descripcion siempre y cuando haya una descripcion con mas de un caracter , me las filtra en minusculas
+  const filteredPhotos = searchDescription.length
+    ? images.filter((img) =>
+        JSON.stringify(img.description)
+          .toLocaleLowerCase()
+          .includes(searchDescription.toLocaleLowerCase()),
+      )
+    : images
 
   return (
-
     <Container maxWidth="2xl">
       <Paper
         sx={{
@@ -53,7 +52,6 @@ export default function SliderMyPhotos() {
         </IconButton>
       </Paper>
       <h1>{searchDescription.toLocaleUpperCase()}</h1>
-      
 
       <ImageList
         sx={{ marginX: 2, marginTop: 6 }}
@@ -62,7 +60,6 @@ export default function SliderMyPhotos() {
         gap={12}
       >
         {filteredPhotos.map((item) => (
-         
           <ImageListItem key={item.id}>
             <img
               src={`${item.thumb}`}
@@ -123,11 +120,7 @@ export default function SliderMyPhotos() {
               }
               actionPosition="right"
             />
-            <Container>
-             {console.log(filteredPhotos)}
-           </Container>
           </ImageListItem>
-           
         ))}
       </ImageList>
     </Container>
