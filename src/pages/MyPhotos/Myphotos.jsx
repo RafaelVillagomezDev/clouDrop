@@ -1,5 +1,5 @@
 
-import Footer from "../../components/footer/Footer";
+import Footer from "../../components/footer/footer";
 import SliderMyPhotos from "../../features/sliderMyPhotos/SliderMyPhotos";
 
 

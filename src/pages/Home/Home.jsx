@@ -1,5 +1,6 @@
 
-import Footer from "../../components/footer/Footer";
+
+import Footer from "../../components/footer/footer";
 import SliderTags from "../../components/sliderTags/SliderTags";
 import SliderImage from "../../features/sliderImage/SliderImage";
 
@@ -10,7 +11,7 @@ function Home(){
       <>
         <SliderTags/>
          <SliderImage/>
-         <Footer/>
+        <Footer/>
       </>
     );
 

@@ -58,7 +58,7 @@ export const sliderImageSlice = createSlice({
       Object.entries(state.myImages)
       saveImageObjectStorage(state.myImages)
     },
-    // editDescription:(state,action)=>{
+     editDescription:()=>{
     //   const {id,description}=action.payload
       
     //   console.log("error")
@@ -68,9 +68,9 @@ export const sliderImageSlice = createSlice({
     //   //  image.description = description;
     //   // state.myImages = listEdit;
     //   // saveImageObjectStorage(state.myImages)
+     console.log("metodo edit")
      
-     
-    // }
+     }
   },
 
   // extraReducers permite que el slice maneje acciones definidas en otro lugar ,
