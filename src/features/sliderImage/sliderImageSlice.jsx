@@ -58,6 +58,19 @@ export const sliderImageSlice = createSlice({
       Object.entries(state.myImages)
       saveImageObjectStorage(state.myImages)
     },
+    // editDescription:(state,action)=>{
+    //   const {id,description}=action.payload
+      
+    //   console.log("error")
+      
+    //   // const listEdit = [...state.myImages];
+    //   // const image = listEdit.find(img => img.id === id);
+    //   //  image.description = description;
+    //   // state.myImages = listEdit;
+    //   // saveImageObjectStorage(state.myImages)
+     
+     
+    // }
   },
 
   // extraReducers permite que el slice maneje acciones definidas en otro lugar ,
@@ -80,4 +93,4 @@ export const sliderImageSlice = createSlice({
 export default sliderImageSlice.reducer
 //Constante me devuleve mi array de imagenes del estado
 export const favImages = (state) => state.images.myImages
-export const { addImage, deleteImage } = sliderImageSlice.actions
+export const { addImage, deleteImage,editDescription } = sliderImageSlice.actions

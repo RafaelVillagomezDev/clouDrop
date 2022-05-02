@@ -5,7 +5,6 @@ import { ImageList } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { ImageListItemBar } from '@mui/material'
 import { ImageListItem } from '@mui/material'
-import EditIcon from '@mui/icons-material/Edit'
 import FileDownloadSharpIcon from '@mui/icons-material/FileDownloadSharp'
 import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp'
 import FavoriteIcon from '@mui/icons-material/Favorite'
@@ -15,6 +14,7 @@ import {
   favImages,
 } from '../sliderImage/sliderImageSlice'
 import { useState } from 'react'
+import ModalEdit from '../../components/modal/ModalEdit'
 
 export default function SliderMyPhotos() {
   const [searchDescription, setSearchDescription] = useState('')
@@ -66,7 +66,7 @@ export default function SliderMyPhotos() {
           <SearchIcon />
         </IconButton>
       </Paper>
-      <h1>{searchDescription.toLocaleUpperCase()}</h1>
+     
       <ImageList
         sx={{ marginX: 2, marginTop: 6 }}
         variant="woven"
@@ -85,7 +85,7 @@ export default function SliderMyPhotos() {
               position="top"
               title={item.description}
               actionIcon={
-                <div>
+                <>
                   <IconButton
                     sx={{ color: 'white' }}
                     aria-label={`info about `}
@@ -103,12 +103,11 @@ export default function SliderMyPhotos() {
                       aria-label={`star `}
                     />
                   </IconButton>
-                  <IconButton
-                    sx={{ color: 'white' }}
-                    aria-label={`info about `}
-                  >
-                    <EditIcon sx={{ color: 'white' }} aria-label={`star `} />
-                  </IconButton>
+
+                    
+                   <ModalEdit item={item} />
+                
+                    
                   <IconButton
                     sx={{ color: 'white' }}
                     aria-label={`info about `}
@@ -119,7 +118,7 @@ export default function SliderMyPhotos() {
                       aria-label={`star `}
                     />
                   </IconButton>
-                </div>
+                </>
               }
               actionPosition="right"
             />

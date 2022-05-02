@@ -52,8 +52,8 @@ const SliderTags = () => {
           >{`#${tag}`}</Button>
         ))}
       </Container>
-
-      <h1>{tagName}</h1>
+     {/* {<Typography variant='h3' gutterBottom sx={{color:'black',marginLeft:12 }} >{tagName}</Typography>} */}
+      
     </div>
   )
 }
