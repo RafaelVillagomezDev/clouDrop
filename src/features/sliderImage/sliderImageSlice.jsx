@@ -59,9 +59,9 @@ export const sliderImageSlice = createSlice({
       saveImageObjectStorage(state.myImages)
     },
      editDescription:(state,action)=>{
-       
+     //Metodo e
+
       const {id,description}=action.payload
- 
       const listEdit = [...state.myImages];
       const image = listEdit.find((img)=>img.id===id);
        image.description = description;

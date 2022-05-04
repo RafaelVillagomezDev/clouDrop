@@ -1,5 +1,5 @@
 import { Container, IconButton, InputBase, Paper } from '@mui/material'
-
+import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search'
 import { ImageList } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,6 +8,12 @@ import { ImageListItem } from '@mui/material'
 import FileDownloadSharpIcon from '@mui/icons-material/FileDownloadSharp'
 import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+
 import {
   deleteImage,
   dowloadImage,
@@ -15,6 +21,8 @@ import {
 } from '../sliderImage/sliderImageSlice'
 import { useState } from 'react'
 import ModalEdit from '../../components/modal/ModalEdit'
+import { margin, padding } from '@mui/system';
+import { useSort } from '../../customHook/useSort';
 
 export default function SliderMyPhotos() {
   const [searchDescription, setSearchDescription] = useState('')
@@ -44,17 +52,35 @@ export default function SliderMyPhotos() {
       )
     : images
 
+    const [typeSort, setTypeSort] = useState('');
+
+    const [list, setList, sort] =useSort(filteredPhotos,typeSort)
+
+    const handleChangeSort = (event) => {
+      setTypeSort(event.target.value);
+      
+      let newSortedList = sort(event.target.value)
+          if (newSortedList[0] === list[0]) newSortedList = sort(event.target.value, true)
+          setList(newSortedList)
+          console.log(list)
+    };
+
+
+   
+    
   return (
-    <Container maxWidth="2xl">
+    <Container maxWidth="xl">
       <Paper
         sx={{
           display: 'flex',
           alignItems: 'center',
           minWidth: 'xs',
           maxWidth: 'md',
-          margin: 'auto',
-          marginTop: 5,
+          margin:'auto',
+          
         }}
+       
+       
       >
         <InputBase
           sx={{ ml: 2, flex: 1, color: 'black' }}
@@ -66,20 +92,37 @@ export default function SliderMyPhotos() {
           <SearchIcon />
         </IconButton>
       </Paper>
-     
+      <Box sx={{ minWidth: 120,width:60,marginTop:4,position:'fixed' , right:0 ,marginRight:3}}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Order</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={typeSort}
+          label="Age"
+          onChange={handleChangeSort}
+        >
+          <MenuItem value={"width"}>Width</MenuItem>
+          <MenuItem value={"height"}>Height</MenuItem>
+          <MenuItem value={"likes"}>Likes</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
       <ImageList
         sx={{ marginX: 2, marginTop: 6 }}
         variant="woven"
         cols={4}
         gap={12}
+        
       >
-        {filteredPhotos.map((item) => (
+        {list.map((item) => (
           <ImageListItem key={item.id}>
             <img
               src={`${item.thumb}`}
               srcSet={`${item.thumb}`}
               alt={`${item.alt_description}`}
               loading="lazy"
+              
             />
             <ImageListItemBar
               position="top"

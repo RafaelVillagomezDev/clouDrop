@@ -80,7 +80,7 @@ const ModalEdit = (props) => {
             /> */}
             <InputBase
               sx={{ ml: 2, flex: 1, color: 'black' }}
-              placeholder="Search things ..."
+              placeholder="Write a new description ..."
               onChange={handleEdit}
               value={wordEdit}
             >
