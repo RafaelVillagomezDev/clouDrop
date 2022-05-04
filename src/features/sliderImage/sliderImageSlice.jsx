@@ -58,18 +58,19 @@ export const sliderImageSlice = createSlice({
       Object.entries(state.myImages)
       saveImageObjectStorage(state.myImages)
     },
-     editDescription:()=>{
-    //   const {id,description}=action.payload
-      
-    //   console.log("error")
-      
-    //   // const listEdit = [...state.myImages];
-    //   // const image = listEdit.find(img => img.id === id);
-    //   //  image.description = description;
-    //   // state.myImages = listEdit;
-    //   // saveImageObjectStorage(state.myImages)
-     console.log("metodo edit")
+     editDescription:(state,action)=>{
+       
+      const {id,description}=action.payload
+ 
+      const listEdit = [...state.myImages];
+      const image = listEdit.find((img)=>img.id===id);
+       image.description = description;
+       state.myImages = listEdit;
+      saveImageObjectStorage(state.myImages)
+
      
+       
+  
      }
   },
 

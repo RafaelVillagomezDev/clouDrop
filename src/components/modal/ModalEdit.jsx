@@ -37,7 +37,7 @@ const ModalEdit = (props) => {
 
   const handleEdit=(e)=>{
     setWordEdit(e.currentTarget.value)
-    const objEdit={id:props.item.id,newDescription:wordEdit}
+    const objEdit={id:props.item.id,description:wordEdit}
     dispatch(editDescription(objEdit))
   }
   
