@@ -58,7 +58,7 @@ export default function SliderMyPhotos() {
 
     const handleChangeSort = (event) => {
       setTypeSort(event.target.value);
-      
+      console.log(event.target.value)
       let newSortedList = sort(event.target.value)
           if (newSortedList[0] === list[0]) newSortedList = sort(event.target.value, true)
           setList(newSortedList)
