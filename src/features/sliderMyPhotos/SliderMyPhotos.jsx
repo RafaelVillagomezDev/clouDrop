@@ -115,7 +115,7 @@ export default function SliderMyPhotos() {
         gap={12}
         
       >
-        {list.map((item) => (
+        {filteredPhotos.map((item) => (
           <ImageListItem key={item.id}>
             <img
               src={`${item.thumb}`}
