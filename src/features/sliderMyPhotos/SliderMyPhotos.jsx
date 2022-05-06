@@ -1,4 +1,4 @@
-import { Container, IconButton, InputBase, Paper } from '@mui/material'
+import { Container, IconButton, InputBase, Paper, useMediaQuery, useTheme } from '@mui/material'
 import Box from '@mui/material/Box'
 import SearchIcon from '@mui/icons-material/Search'
 import { ImageList } from '@mui/material'
@@ -20,6 +20,7 @@ import {
   dowloadImage,
   favImages,
 } from '../sliderImage/sliderImageSlice'
+
 
 export default function SliderMyPhotos() {
   const [searchDescription, setSearchDescription] = useState('')
@@ -70,9 +71,11 @@ export default function SliderMyPhotos() {
   }
 
   // const imgSee = searchDescription.length ? filteredPhotos : list
-
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.up('sm'))
+  
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{marginTop:'22px'}}>
       <Paper
         sx={{
           display: 'flex',
@@ -80,7 +83,9 @@ export default function SliderMyPhotos() {
           minWidth: 'xs',
           maxWidth: 'md',
           margin: 'auto',
+          
         }}
+        
       >
         <InputBase
           sx={{ ml: 2, flex: 1, color: 'black' }}
@@ -94,10 +99,10 @@ export default function SliderMyPhotos() {
       </Paper>
       <Box
         sx={{
-          minWidth: 120,
-          width: 60,
+          minWidth: 80,
+          width: 40,
           marginTop: 4,
-          position: 'fixed',
+          position: 'absolute',
           right: 0,
           marginRight: 3,
         }}
@@ -118,9 +123,9 @@ export default function SliderMyPhotos() {
         </FormControl>
       </Box>
       <ImageList
-        sx={{ marginX: 2, marginTop: 6 }}
+        sx={{ marginX: 2, marginTop: 12 }}
         variant="woven"
-        cols={4}
+        cols={isMobile ? 4 : 1}
         gap={12}
       >
         {filteredPhotos.map((item) => (
