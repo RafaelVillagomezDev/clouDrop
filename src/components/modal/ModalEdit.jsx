@@ -9,7 +9,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import DoneIcon from '@mui/icons-material/Done';
 import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { editDescription } from '../../features/sliderImage/sliderImageSlice'
 
@@ -37,10 +37,11 @@ const ModalEdit = (props) => {
 
   const handleEdit=(e)=>{
     setWordEdit(e.currentTarget.value)
-    const objEdit={id:props.item.id,description:wordEdit}
+    var objEdit={id:props.item.id,description:wordEdit}
     dispatch(editDescription(objEdit))
+    
   }
-  
+
 
   
 

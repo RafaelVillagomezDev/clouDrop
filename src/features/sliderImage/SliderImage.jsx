@@ -43,7 +43,7 @@ export default function SliderImage() {
   }, [searchValue, dispatch, busqueda])
 
   return (
-    <Container maxWidth="2xl" sx={{marginTop:4}}>
+    <Container maxWidth="2xl" sx={{ marginTop: 4 }}>
       <Paper
         sx={{
           display: 'flex',
