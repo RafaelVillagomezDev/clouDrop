@@ -1,4 +1,11 @@
-import { Container, IconButton, InputBase, Paper, useMediaQuery, useTheme } from '@mui/material'
+import {
+  Container,
+  IconButton,
+  InputBase,
+  Paper,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material'
 import Box from '@mui/material/Box'
 import SearchIcon from '@mui/icons-material/Search'
 import { ImageList } from '@mui/material'
@@ -12,7 +19,7 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ModalEdit from '../../components/modal/ModalEdit'
 import { useSort } from '../../customHook/useSort'
 import {
@@ -21,26 +28,21 @@ import {
   favImages,
 } from '../sliderImage/sliderImageSlice'
 
-
 export default function SliderMyPhotos() {
   const [searchDescription, setSearchDescription] = useState('')
 
   // const [searchDeleteImage,setDeleteImage]=useState('');
 
+  const dispath = useDispatch()
+  const images = useSelector(favImages)
+
   const handleSearchDescription = (e) => {
     setSearchDescription(e.currentTarget.value)
   }
 
-  const dispath = useDispatch()
-  const images = useSelector(favImages)
-
   const handleDeleteImage = (idBuscar) => {
     dispath(deleteImage(idBuscar))
   }
-
-  // useEffect(()=>{
-  //   dispath(deleteImage(setSearchDescription))
-  // },[])
 
   const handleDowloadImage = (urlImage, nameImage) => {
     const obj = { url: urlImage, name: nameImage }
@@ -62,20 +64,20 @@ export default function SliderMyPhotos() {
 
   const handleChangeSort = (event) => {
     setTypeSort(event.target.value)
-    console.log(event.target.value)
+
     let newSortedList = sort(event.target.value)
     if (newSortedList[0] === list[0])
       newSortedList = sort(event.target.value, true)
     setList(newSortedList)
-    console.log(list)
   }
 
-  // const imgSee = searchDescription.length ? filteredPhotos : list
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.up('sm'))
-  
+
+  useEffect(() => {}, [])
+
   return (
-    <Container maxWidth="xl" sx={{marginTop:'22px'}}>
+    <Container maxWidth="xl" sx={{ marginTop: '22px' }}>
       <Paper
         sx={{
           display: 'flex',
@@ -83,9 +85,7 @@ export default function SliderMyPhotos() {
           minWidth: 'xs',
           maxWidth: 'md',
           margin: 'auto',
-          
         }}
-        
       >
         <InputBase
           sx={{ ml: 2, flex: 1, color: 'black' }}
@@ -128,7 +128,7 @@ export default function SliderMyPhotos() {
         cols={isMobile ? 4 : 1}
         gap={12}
       >
-        {filteredPhotos.map((item) => (
+        {list.map((item) => (
           <ImageListItem key={item.id}>
             <img
               src={`${item.thumb}`}
